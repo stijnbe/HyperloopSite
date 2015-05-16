@@ -14,12 +14,11 @@ html
       var width = 960,height = 600;
       var path = d3.geo.path().projection(null);
       var svg = d3.select("body").append("svg").attr("width", width).attr("height", height);
-      var object = nocounties.json;
-      var str = JSON.stringify(object, null, 2);
-      alert(str);
-      d3.json(object, function(error, us) {
-        alert(error);
+      //d3.json(object, function(error, us) {
+        //alert(error);
         //if (error) return console.error(error);
-        //svg.append("path").datum(topojson.mesh(us)).attr("d", path);
-      });
+      counties = "counties.json";
+      us = JSON.parse(counties); 
+      svg.append("path").datum(topojson.mesh(us)).attr("d", path);
+      //});
     p testing2
