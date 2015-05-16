@@ -14,7 +14,7 @@ html
       var width = 960,height = 600;
       var path = d3.geo.path().projection(null);
       var svg = d3.select("body").append("svg").attr("width", width).attr("height", height);
-      var object = "counties.json"
+      var object = "nocounties.json"
       d3.json(object, function(error, us) {
         alert(error);
         //if (error) return console.error(error);
