@@ -1,6 +1,6 @@
 var width = 960, height = 600;
 var path = d3.geo.path().projection(null);
-var svg = d3.select("body")
+var svg = d3.select("#map")
             .append("svg")
             .attr("width", width)
             .attr("height", height);
@@ -19,7 +19,7 @@ d3.json("json/us.json", function(error, us) {
      .attr("class", "border border--state")
      .attr("d", path);
 
-  var projection = d3.geo.albersUsa().scale(1280).translate([width/2,height/2]);
+  projection = d3.geo.albersUsa().scale(1280).translate([width/2,height/2]); 
 
   function lonlat_to_xy(lonlat,projection){
     return projection(lonlat);
@@ -29,44 +29,48 @@ d3.json("json/us.json", function(error, us) {
     return lonlats.map( function(lonlat) { return lonlat_to_xy(lonlat,projection)})
   }
 
-d3.json("json/cityPairs.json", function(error, data) {
-  if (error) return console.error(error);
-  data.cityPairs.forEach(function(pair){
+  d3.json("json/cityPairs.json", function(error, data) {
+    if (error) return console.error(error);
+    data.cityPairs.forEach(function(pair){
+      pair.startLatLng.Lng = +pair.startLatLng.Lng;
+      pair.startLatLng.Lat = +pair.startLatLng.Lat;
+      startXY = projection([pair.startLatLng.Lng,pair.startLatLng.Lat]);   
+      endXY = projection([pair.endLatLng.Lng,pair.endLatLng.Lat]);
+      pair.startXY.x = startXY[0];
+      pair.startXY.y = startXY[1];    
+      pair.endXY.x = endXY[0];
+      pair.endXY.y = endXY[1];
 
-    console.log(pair.startLatLng.Lng)      
-    console.log(pair.startLatLng.Lat)
-    console.log(pair.endLatLng.Lng)
-    console.log(pair.endLatLng.Lat)
+      svg.append("line")
+         .attr("x1",pair.startXY.x)
+         .attr("y1",pair.startXY.y)
+         .attr("x2",pair.endXY.x)
+         .attr("y2",pair.endXY.y)
+         .attr("stroke-width", 4)
+         .attr("stroke", "green")
+         .on("mouseover", mouseOver)
+         .on("mouseout", mouseOut)
+         .on("click", function(d,i){          
+             window.location.href += "citypair";
+          });
 
-    svg.append("line")
-       .attr("x1",)//pair.startLatLng.Lng)
-       .attr("y1",)//pair.startLatLng.Lat)
-       .attr("x2",)//pair.endLatLng.Lng)
-       .attr("y2",)//pair.endLatLng.Lat)
-       .attr("stroke-width", 4)
-       .attr("stroke", "green")
-       .on("mouseover", mouseOver)
-       .on("mouseout", mouseOut)
-       .on("click", function(d,i){          
-            window.location.href += "citypair";
-        });
-
-    svg.append("circle")
-       .attr("cx",)
-       .attr("cy",)
-       .attr("r", "8px")
-       .attr("fill", "blue")   
+      svg.append("circle")
+         .attr("cx",pair.startXY.x)
+         .attr("cy",pair.startXY.y)
+         .attr("r", "8px")
+         .attr("fill", "blue")   
       
-    svg.append("circle")
-       .attr("cx",pair.endLatLng.Lng)
-       .attr("cy",pair.endLatLng.Lng)
-       .attr("r", "8px")
-       .attr("fill", "blue")
-
+      svg.append("circle")
+         .attr("cx",pair.endXY.x)
+         .attr("cy",pair.endXY.y)
+         .attr("r", "8px")
+         .attr("fill", "blue")
+    
+    });
   });
-});
-  /*
+  /* 
   var xyCoords=lonlats_to_xys([[-118.23, 34.05],[-122.4167, 37.7833]],projection);
+  //console.log(projection([-118.23,34.05]));
   var numCities = xyCoords.length;   
 
   svg.append("line")
@@ -90,6 +94,7 @@ d3.json("json/cityPairs.json", function(error, data) {
        .attr("fill", "blue")
   }
   */
+
   function mouseOver(d) {
     d3.select(this)
       .transition()

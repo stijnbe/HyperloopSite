@@ -1,0 +1,54 @@
+{
+  "cityPairs" : [
+    {
+      "pairId" : "1", 
+      "startName" : "Los Angeles",
+      "endName" : "San Francisco", 
+      "startLatLng":
+      {
+        "Lat": "34.05",
+        "Lng": "-118.23"
+      },
+      "endLatLng":
+      {
+        "Lat": "37.7833",
+        "Lng": "-122.4167"
+      },
+      "startXY":
+      {
+        "x": "",
+        "y": ""
+      },
+      "endXY":
+      {
+        "x": "",
+        "y": ""
+      }
+    },
+    { 
+      "pairId" : "2",
+      "startName" : "Dallas",
+      "endName" : "Houston", 
+      "startLatLng":
+      {
+        "Lat": "32.7767",
+        "Lng": "-96.7970"
+      },
+      "endLatLng":
+      {
+        "Lat": "29.7604",
+        "Lng": "-95.3698"
+      },
+      "startXY":
+      {
+        "x": "",
+        "y": ""
+      },
+      "endXY":
+      {
+        "x": "",
+        "y": ""
+      }
+    }
+  ]
+}
