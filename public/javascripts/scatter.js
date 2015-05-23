@@ -1,8 +1,12 @@
 //credit to weiglemc's block 6185069
 
+var divWidth = $( "#map-canvas" ).width();
+var divHeight = $( "#map-canvas" ).height()
+//console.log(divWidth);
+
 var margin = {top: 20, right: 20, bottom: 30, left: 40},
-    width = 960 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+    width = divWidth - margin.left - margin.right,
+    height = divHeight - margin.top - margin.bottom;
 
 /*
  * value accessor - returns the value to encode for a given data object.
@@ -28,7 +32,12 @@ var cValue = function(d) { return d.route; },
     color = d3.scale.category10()
 
 //add the graph canvas to the body of the webpage
-var svg = d3.select("#scatterplot").append("svg")
+var svg = d3.select("#scatterplot")
+            .append("svg")
+            .attr("width", "100%")
+            .attr("height", "100%")
+            //.attr("viewBox", "0 0 640 480")
+            //.attr("preserveAspectRatio", "xMaxYmax")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
             .append("g")

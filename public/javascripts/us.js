@@ -51,49 +51,27 @@ d3.json("json/us.json", function(error, us) {
          .on("mouseover", mouseOver)
          .on("mouseout", mouseOut)
          .on("click", function(d,i){          
-             window.location.href += "citypair";
+             window.location.href += "pair";
           });
 
       svg.append("circle")
          .attr("cx",pair.startXY.x)
          .attr("cy",pair.startXY.y)
          .attr("r", "8px")
-         .attr("fill", "blue")   
+         .attr("fill", "#0000FF")  
+         //.attr("stroke", "#000")
+         //.attr("strokeWidth", 3) 
       
       svg.append("circle")
          .attr("cx",pair.endXY.x)
          .attr("cy",pair.endXY.y)
          .attr("r", "8px")
-         .attr("fill", "blue")
+         .attr("fill", "#0000FF")
+         //.attr("stroke", "#000")
+         //.attr("strokeWidth", 3) 
     
     });
   });
-  /* 
-  var xyCoords=lonlats_to_xys([[-118.23, 34.05],[-122.4167, 37.7833]],projection);
-  //console.log(projection([-118.23,34.05]));
-  var numCities = xyCoords.length;   
-
-  svg.append("line")
-     .attr("x1",xyCoords[0][0])
-     .attr("y1",xyCoords[0][1])
-     .attr("x2",xyCoords[1][0])
-     .attr("y2",xyCoords[1][1])
-     .attr("stroke-width", 4)
-     .attr("stroke", "green")
-     .on("mouseover", mouseOver)
-     .on("mouseout", mouseOut)
-     .on("click", function(d,i){          
-            window.location.href += "citypair";
-        });
-
-  for(i = 0; i < numCities; i++){
-    svg.append("circle")
-       .attr("cx",xyCoords[i][0])
-       .attr("cy",xyCoords[i][1])
-       .attr("r", "8px")
-       .attr("fill", "blue")
-  }
-  */
 
   function mouseOver(d) {
     d3.select(this)
