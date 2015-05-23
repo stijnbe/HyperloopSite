@@ -55,8 +55,10 @@ d3.json("json/pairs.json", function(error,data){
     route.tripTime = +route.tripTime
   });
 
-  xScale.domain([d3.min(data.cityPairs[0].routes,xValue)-1, d3.max(data.cityPairs[0].routes,xValue)+1]);
-  yScale.domain([d3.min(data.cityPairs[0].routes,yValue)-1, d3.max(data.cityPairs[0].routes,yValue)+1]);
+  var xPadding = (d3.max(data.cityPairs[0].routes,xValue) - d3.min(data.cityPairs[0].routes,xValue))/10
+  var yPadding = (d3.max(data.cityPairs[0].routes,yValue) - d3.min(data.cityPairs[0].routes,yValue))/10
+  xScale.domain([d3.min(data.cityPairs[0].routes,xValue)-xPadding, d3.max(data.cityPairs[0].routes,xValue)+xPadding]);
+  yScale.domain([d3.min(data.cityPairs[0].routes,yValue)-yPadding, d3.max(data.cityPairs[0].routes,yValue)+yPadding]);
   
   // x-axis
   svg.append("g")
