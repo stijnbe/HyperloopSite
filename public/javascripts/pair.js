@@ -1,12 +1,17 @@
 var map;
+//var index = "1";
 var sfLatLng = [37.7833, -122.4167];
 var laLatLng = [34.05, -118.23];
 
-function initialize_map() {
-  var mapDiv = document.getElementById('map-canvas');
+/*$.getJSON("json/cityPairs.json", function (data) {
+  console.log(data);
+});*/
+
+function initialize() {
+  var mapDiv = document.getElementById("map-canvas");
   var mapOptions = {
     zoom: 8,
-    center: new google.maps.LatLng(37.7833, -122.4167),
+    center: new google.maps.LatLng(0, 0),
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };  
   var map = new google.maps.Map(mapDiv,mapOptions);
@@ -53,7 +58,5 @@ function initialize_map() {
       exampleBase1.setOptions({strokeOpacity: 0.2});
     }
   });
-
 }
-
-google.maps.event.addDomListener(window, 'load', initialize_map);
+google.maps.event.addDomListener(window, 'load', initialize);

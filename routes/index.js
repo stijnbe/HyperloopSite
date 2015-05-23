@@ -6,7 +6,7 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Hyperloop Transportation Technologies' });
 });
 
-router.get('/citypair', function(req, res, next){
+router.get('/pair', function(req, res, next){
   res.render('pair', { title: 'Los Angeles to San Francisco Routes'});
 });
 
