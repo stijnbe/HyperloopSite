@@ -29,7 +29,7 @@ d3.json("json/us.json", function(error, us) {
     return lonlats.map( function(lonlat) { return lonlat_to_xy(lonlat,projection)})
   }
 
-  d3.json("json/cityPairs.json", function(error, data) {
+  d3.json("json/pairs.json", function(error, data) {
     if (error) return console.error(error);
     data.cityPairs.forEach(function(pair){
       pair.startLatLng.Lng = +pair.startLatLng.Lng;

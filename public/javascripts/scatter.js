@@ -48,9 +48,9 @@ var tooltip = d3.select("body").append("div")
 //load data
 d3.json("json/pairs.json", function(error,data){
   if (error) return console.error(error);
-  console.log(data.cityPairs[0].routes);
+  //console.log(data.cityPairs[0].routes);
   data.cityPairs[0].routes.forEach(function(route) {
-    console.log(route);
+    //console.log(route);
     route.cost = +route.cost;
     route.tripTime = +route.tripTime
   });
