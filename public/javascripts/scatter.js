@@ -78,7 +78,7 @@ d3.json("json/sf-la.json", function(error,data){
      .append("text")
      .attr("class", "label")
      .attr("transform", "rotate(-90)")
-     .attr("y", -6)
+     .attr("y", 6)
      .attr("dy", ".71em")
      .style("text-anchor", "end")
      .text("Trip Time (in minutes)")

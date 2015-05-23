@@ -6,6 +6,7 @@ html, body, #map-canvas {
 
 .col-md-6, .row {
   height: 100%;
+  padding: 25px;
 }  
 
 .axis path,
