@@ -2,7 +2,6 @@
 
 var divWidth = $( "#map-canvas" ).width();
 var divHeight = $( "#map-canvas" ).height()
-//console.log(divWidth);
 
 var margin = {top: 20, right: 20, bottom: 30, left: 40},
     width = divWidth - margin.left - margin.right,
@@ -36,8 +35,6 @@ var svg = d3.select("#scatterplot")
             .append("svg")
             .attr("width", "100%")
             .attr("height", "100%")
-            //.attr("viewBox", "0 0 640 480")
-            //.attr("preserveAspectRatio", "xMaxYmax")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
             .append("g")
@@ -49,15 +46,17 @@ var tooltip = d3.select("body").append("div")
                 .style("opacity", 0)
 
 //load data
-d3.json("json/sf-la.json", function(error,data){
+d3.json("json/pairs.json", function(error,data){
   if (error) return console.error(error);
-  data.routes.forEach(function(route) {
+  console.log(data.cityPairs[0].routes);
+  data.cityPairs[0].routes.forEach(function(route) {
+    console.log(route);
     route.cost = +route.cost;
     route.tripTime = +route.tripTime
   });
 
-  xScale.domain([d3.min(data.routes,xValue)-1, d3.max(data.routes,xValue)+1]);
-  yScale.domain([d3.min(data.routes,yValue)-1, d3.max(data.routes,yValue)+1]);
+  xScale.domain([d3.min(data.cityPairs[0].routes,xValue)-1, d3.max(data.cityPairs[0].routes,xValue)+1]);
+  yScale.domain([d3.min(data.cityPairs[0].routes,yValue)-1, d3.max(data.cityPairs[0].routes,yValue)+1]);
   
   // x-axis
   svg.append("g")
@@ -85,7 +84,7 @@ d3.json("json/sf-la.json", function(error,data){
  
   // draw dots
   svg.selectAll(".dot")
-     .data(data.routes)
+     .data(data.cityPairs[0].routes)
      .enter()
      .append("circle")
      .attr("class", "dot")
@@ -93,18 +92,19 @@ d3.json("json/sf-la.json", function(error,data){
      .attr("cx",xMap)
      .attr("cy",yMap)
      .style("fill", function(d) {return color(cValue(d));})
-     .on("mouseover", function(d) {
-        tooltip.transition()
-               .duration(200)
-               .style("opacity", .9);
-        tooltip.html("tooltip")
-               .style("left", (d3.event.pageX + 5) + "px")
-               .style("top", (d3.event.pageY - 28) + "px");
-     })
+     .on("mouseover", function(d){
+       tooltip.transition()
+              .duration(200)
+              .style("opacity", .9);
+       tooltip.html("cost: " + d.cost + ", trip time: " + d.tripTime)
+              .style("left", (d3.event.pageX + 5) + "px")
+              .style("top", (d3.event.pageY -28) + "px");
+       })
      .on("mouseout", function(d) {
         tooltip.transition(500)
                .style("opacity", 0);
      });
+
 });
 
 

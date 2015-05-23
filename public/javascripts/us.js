@@ -59,16 +59,12 @@ d3.json("json/us.json", function(error, us) {
          .attr("cy",pair.startXY.y)
          .attr("r", "8px")
          .attr("fill", "#0000FF")  
-         //.attr("stroke", "#000")
-         //.attr("strokeWidth", 3) 
       
       svg.append("circle")
          .attr("cx",pair.endXY.x)
          .attr("cy",pair.endXY.y)
          .attr("r", "8px")
          .attr("fill", "#0000FF")
-         //.attr("stroke", "#000")
-         //.attr("strokeWidth", 3) 
     
     });
   });
