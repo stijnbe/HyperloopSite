@@ -4,11 +4,24 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+
+var awsMongodb = 'ec2-52-1-191-215.compute-1.amazonaws.com';
+var mongoPort = 27017;
+var mongoURL = 'mongodb://' + awsMongodb + ':' + String(mongoPort);
+//console.log(mongoURL);
+mongoose.connect(mongoURL, function(err) {
+  if(err) {
+    console.log('database connection error', err);
+  } else {
+    console.log('database connection successful');
+  }  
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
